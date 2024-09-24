@@ -1,0 +1,35 @@
+2024/09/20-21:37:39.523 1cf8 Reusing MANIFEST C:\Users\gitai\AppData\Local\Temp\flutter_tools.2926ed24\flutter_tools_chrome_device.8d7ceb4e\Default\IndexedDB\https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/09/20-21:37:39.524 1cf8 Recovering log #3
+2024/09/20-21:37:39.525 1cf8 Reusing old log C:\Users\gitai\AppData\Local\Temp\flutter_tools.2926ed24\flutter_tools_chrome_device.8d7ceb4e\Default\IndexedDB\https_www.youtube.com_0.indexeddb.leveldb/000003.log 
+2024/09/20-21:37:40.585 37f4 Manual compaction at level-0 from '\x00\x02\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x03\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.706 37f4 Level-0 table #5: started
+2024/09/20-21:37:40.710 37f4 Level-0 table #5: 280222 bytes OK
+2024/09/20-21:37:40.712 37f4 Delete type=0 #3
+2024/09/20-21:37:40.713 1cf8 Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.742 37f4 Level-0 table #7: started
+2024/09/20-21:37:40.743 37f4 Level-0 table #7: 1893 bytes OK
+2024/09/20-21:37:40.744 37f4 Delete type=0 #4
+2024/09/20-21:37:40.745 398c Manual compaction at level-0 from '\x00\x08\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x09\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.745 398c Manual compaction at level-1 from '\x00\x08\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x09\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0f\x00\x00\xc8\x05\x00p\x00r\x00e\x00f\x00s' @ 2416 : 1
+2024/09/20-21:37:40.745 398c Compacting 1@1 + 1@2 files
+2024/09/20-21:37:40.748 398c Generated table #8@1: 360 keys, 26679 bytes
+2024/09/20-21:37:40.748 398c Compacted 1@1 + 1@2 files => 26679 bytes
+2024/09/20-21:37:40.749 398c compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/09/20-21:37:40.750 37f4 Manual compaction at level-1 from '\x00\x0f\x00\x00\xc8\x05\x00p\x00r\x00e\x00f\x00s' @ 2416 : 1 .. '\x00\x09\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.761 37f4 Level-0 table #10: started
+2024/09/20-21:37:40.762 37f4 Level-0 table #10: 1095 bytes OK
+2024/09/20-21:37:40.764 37f4 Delete type=2 #5
+2024/09/20-21:37:40.764 37f4 Delete type=0 #6
+2024/09/20-21:37:40.764 37f4 Delete type=2 #7
+2024/09/20-21:37:40.765 398c Manual compaction at level-0 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.765 398c Manual compaction at level-1 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at '\x00\x06\x01 \x03\x00\x00\x00\x00\x00\x00\xf0?\x00\x04\x02\x01\x17\x00s\x00e\x00r\x00v\x00i\x00c\x00e\x00:\x00t\x00o\x00p\x00b\x00a\x00r\x00:\x00f\x00a\x00l\x00l\x00b\x00a\x00c\x00k\x03\x00\x00\x00\x00\x00\x00\xf0?' @ 2529 : 0
+2024/09/20-21:37:40.765 398c Compacting 1@1 + 1@2 files
+2024/09/20-21:37:40.768 398c Generated table #11@1: 325 keys, 16464 bytes
+2024/09/20-21:37:40.768 398c Compacted 1@1 + 1@2 files => 16464 bytes
+2024/09/20-21:37:40.769 398c compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/09/20-21:37:40.769 398c Delete type=2 #10
+2024/09/20-21:37:40.770 398c Manual compaction at level-1 from '\x00\x06\x01 \x03\x00\x00\x00\x00\x00\x00\xf0?\x00\x04\x02\x01\x17\x00s\x00e\x00r\x00v\x00i\x00c\x00e\x00:\x00t\x00o\x00p\x00b\x00a\x00r\x00:\x00f\x00a\x00l\x00l\x00b\x00a\x00c\x00k\x03\x00\x00\x00\x00\x00\x00\xf0?' @ 2529 : 0 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.778 1cf8 Manual compaction at level-0 from '\x00\x09\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0a\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.778 1cf8 Manual compaction at level-1 from '\x00\x09\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0a\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.790 37f4 Manual compaction at level-0 from '\x00\x07\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x08\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/09/20-21:37:40.791 4c74 Manual compaction at level-1 from '\x00\x07\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x08\x00\x00\x00' @ 0 : 0; will stop at (end)
