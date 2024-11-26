@@ -1,4 +1,4 @@
-import 'package:amplify/domain/model/login_res.dart';
+import 'package:amplify/models/response/login_res.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class AuthState extends Equatable {

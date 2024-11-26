@@ -1,4 +1,4 @@
-import 'package:amplify/data/services/navigation_service.dart';
+import 'package:amplify/data/api_services/navigation_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

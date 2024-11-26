@@ -1,0 +1,1 @@
+ D:\\App\\amplify_client\\.dart_tool\\flutter_build\\0256ce5d2884049c80f1a7fa61d47d74\\native_assets.yaml: 

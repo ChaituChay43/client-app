@@ -1,8 +1,8 @@
 import 'package:amplify/blocs/base_bloc.dart';
 import 'package:amplify/blocs/route/route_bloc.dart';
-import 'package:amplify/data/repositories/auth_repository.dart';
+import 'package:amplify/blocs/auth/auth_repository.dart';
 import 'package:amplify/data/repositories/profile_repository.dart';
-import 'package:amplify/data/services/storage_service.dart';
+import 'package:amplify/data/api_services/storage_service.dart';
 import 'package:amplify/route/route.dart';
 import 'package:amplify/util/auth_helper.dart';
 import 'package:flutter/foundation.dart';
@@ -63,6 +63,13 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
             bool isRefreshed = await AuthHelper.handleRefresh();
             debugPrint(isRefreshed.toString());
           }
+
+           // Fetch the clientId from the API response
+          String? clientId = await _authRepository.fetchClientId(); // Adjust this to your actual logic
+          if (clientId != null) {
+            await _authRepository.setClientId(clientId); // Store in session storage
+          }
+          
           _researchWatchlistAPI(event, emit);
           if (isLoggedIn) {
             await _authRepository.updateLoginStatus("", null);

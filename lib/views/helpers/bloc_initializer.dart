@@ -2,7 +2,7 @@ import 'package:amplify/blocs/auth/auth_bloc.dart';
 import 'package:amplify/blocs/profile/profile_bloc.dart';
 import 'package:amplify/blocs/route/route_bloc.dart';
 import 'package:amplify/blocs/theme_bloc.dart';
-import 'package:amplify/data/services/navigation_service.dart';
+import 'package:amplify/data/api_services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

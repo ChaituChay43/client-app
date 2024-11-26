@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:amplify/blocs/profile/profile_event.dart';
 import 'package:amplify/blocs/profile/profile_state.dart';
 import 'package:amplify/data/repositories/profile_repository.dart';
-import 'package:amplify/data/services/base_service.dart';
+import 'package:amplify/data/api_services/base_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {

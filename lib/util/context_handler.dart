@@ -1,4 +1,4 @@
-import 'package:amplify/data/services/storage_service.dart';
+import 'package:amplify/data/api_services/storage_service.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ContextHandler {
