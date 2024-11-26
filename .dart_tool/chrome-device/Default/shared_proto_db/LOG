@@ -1,21 +1,4 @@
-2024/09/24-12:33:38.329 54 Reusing MANIFEST C:\Users\gitai\AppData\Local\Temp\flutter_tools.e9fb9dba\flutter_tools_chrome_device.5c35ac73\Default\shared_proto_db/MANIFEST-000001
-2024/09/24-12:33:38.330 54 Recovering log #32
-2024/09/24-12:33:38.333 54 Reusing old log C:\Users\gitai\AppData\Local\Temp\flutter_tools.e9fb9dba\flutter_tools_chrome_device.5c35ac73\Default\shared_proto_db/000032.log 
-2024/09/24-12:33:38.335 54 Delete type=0 #3
-2024/09/24-12:33:38.335 54 Delete type=0 #4
-2024/09/24-12:33:38.335 54 Delete type=0 #7
-2024/09/24-12:33:38.335 54 Delete type=2 #8
-2024/09/24-12:33:38.335 54 Delete type=0 #10
-2024/09/24-12:33:38.335 54 Delete type=2 #11
-2024/09/24-12:33:38.335 54 Delete type=0 #13
-2024/09/24-12:33:38.335 54 Delete type=2 #14
-2024/09/24-12:33:38.337 54 Delete type=0 #16
-2024/09/24-12:33:38.337 54 Delete type=2 #17
-2024/09/24-12:33:38.337 54 Delete type=0 #19
-2024/09/24-12:33:38.337 54 Delete type=2 #21
-2024/09/24-12:33:38.337 54 Delete type=0 #23
-2024/09/24-12:33:38.337 54 Delete type=2 #24
-2024/09/24-12:33:38.337 54 Delete type=0 #26
-2024/09/24-12:33:38.337 54 Delete type=2 #27
-2024/09/24-12:33:38.337 54 Delete type=0 #29
-2024/09/24-12:33:38.337 54 Delete type=2 #30
+2024/11/26-11:06:57.928 770c Reusing MANIFEST C:\Users\gitai\AppData\Local\Temp\flutter_tools.b05b9c95\flutter_tools_chrome_device.b337cb42\Default\shared_proto_db/MANIFEST-000001
+2024/11/26-11:06:57.929 770c Recovering log #4
+2024/11/26-11:06:57.930 770c Reusing old log C:\Users\gitai\AppData\Local\Temp\flutter_tools.b05b9c95\flutter_tools_chrome_device.b337cb42\Default\shared_proto_db/000004.log 
+2024/11/26-11:06:57.931 770c Delete type=0 #3

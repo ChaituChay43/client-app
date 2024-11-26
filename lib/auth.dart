@@ -6,7 +6,7 @@ import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'globals.dart' as globals;
 
 var pkce;
-const bool RUNNING_LOCALLY = false;
+const bool RUNNING_LOCALLY = true;
 
 final class Auth {
   static const scheme = "https";

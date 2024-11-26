@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:amplify/data/services/storage_service.dart';
+import 'package:amplify/data/api_services/storage_service.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
 import 'package:pkce/pkce.dart';

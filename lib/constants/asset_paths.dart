@@ -40,7 +40,9 @@ class AssetPaths {
      static const String addeparIcon = '$svgPath/Addepar-Logo.wine';
 
   //Money
-static const String moneyIcon = '$svgPath/money_menu.svg';
+   static const String moneyIcon = '$svgPath/money_menu.svg';
   static const String moneyIconSelected = '$svgPath/money_menu_selected.svg';
-  
+    static const String accountDetailsMoney = '$svgPath/accountDetails.svg';
+  //Empty Data
+   static const String noData = '$svgPath/noData.svg';
 }
