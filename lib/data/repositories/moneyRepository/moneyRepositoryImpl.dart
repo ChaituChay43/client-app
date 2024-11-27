@@ -10,37 +10,44 @@ class MoneyRepositoryImpl implements MoneyRepository {
 @override
 Future<List<Asset>> fetchAssets(String accountId) async {
   try {
-    // Fetch assets from the API
-    final List<Asset> assets = await _apiServices.fetchAssetsByAccountId(accountId);
-    
-    // Print the fetched assets to verify data with readable output using toString()
-    print("Fetched assets: ${assets.map((asset) => asset.toString()).toList()}");
-
-    // Return the assets list
-    return assets;
+    final data = await _apiServices.fetchAccountData(accountId);
+    // Parse the 'assets' part of the response
+    if (data.containsKey('assets') && data['assets'] is List) {
+      final List<dynamic> assetsData = data['assets'];
+      print('Fetched assets data: $assetsData');
+      
+      return assetsData.map((json) {
+        final assetJson = Map<String, dynamic>.from(json as Map);
+        return Asset.fromJson(assetJson);
+      }).toList();
+    } else {
+      throw FormatException('Assets data not found or in unexpected format.');
+    }
   } catch (e) {
     print("Error in fetchAssets: $e");
-    rethrow; // Rethrow the error after logging it
+    rethrow;
   }
 }
 
 @override
 Future<List<StockAsset>> fetchHoldings(String accountId) async {
   try {
-    // Fetch holdings from the API
-    final List<StockAsset> holdings = await _apiServices.fetchHoldingsByAccountId(accountId);
-    
-    // Print the fetched holdings to verify data with readable output using toString()
-    print("Fetched holdings: ${holdings.map((holding) => holding.toString()).toList()}");
-
-    // Return the holdings list
-    return holdings;
+    final data = await _apiServices.fetchAccountData(accountId);
+    // Parse the 'holdings' part of the response
+    if (data.containsKey('holdings') && data['holdings'] is List) {
+      final List<dynamic> holdingsData = data['holdings'];
+      print('Fetched holdings data: $holdingsData');
+      return holdingsData.map((json) {
+        final holdingJson = Map<String, dynamic>.from(json as Map);
+        return StockAsset.fromJson(holdingJson);
+      }).toList();
+    } else {
+      throw FormatException('Holdings data not found or in unexpected format.');
+    }
   } catch (e) {
     print("Error in fetchHoldings: $e");
-    rethrow; // Rethrow the error after logging it
+    rethrow;
   }
 }
-
-
 
 }

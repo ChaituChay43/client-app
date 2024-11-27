@@ -1,12 +1,10 @@
 import 'package:amplify/data/api_services/base_service.dart';
 import 'package:amplify/models/other/account_data.dart';
-import 'package:amplify/models/response/Asset.dart';
 import 'package:amplify/models/response/Household.dart';
-import 'package:amplify/models/response/StockAsset.dart';
-import 'package:amplify/models/response/history.dart';
 
 class ApiServices extends BaseService {
-  Future<List<Household>> fetchClients() async {
+
+Future<List<Household>> fetchClients() async {
     try {
       final BaseResModel baseRes = await doGet('$serviceURL/portal');
       print('fetching households: $baseRes');
@@ -24,7 +22,7 @@ class ApiServices extends BaseService {
     }
   }
 
-   Future<List<Account>> fetchAccountsByClientId(String clientId) async {
+Future<List<Account>> fetchAccountsByClientId(String clientId) async {
   try {
     final BaseResModel baseRes = await doGet('$serviceURL/portal/household/$clientId/accounts');
     print('fetching accounts for client $clientId: $baseRes');
@@ -71,114 +69,47 @@ Future<Account> fetchAccountById(String accountId) async {
   }
 }
 
-
-Future<List<Asset>> fetchAssetsByClientId(String clientId) async {
+Future<Map<String, dynamic>> fetchDataByClientId(String clientId) async {
   try {
-    // Make GET request to fetch assets
+    // Make GET request to fetch data (assets and history)
     final BaseResModel baseRes = await doGet('$serviceURL/portal/household/$clientId');
-    print('Fetching assets for client $clientId: $baseRes');
-      final List<dynamic> data = baseRes.data["assets"];
-      print('Assets data: $data');
-
-      // Parse each item as Asset if it is a Map
-      return data.map((json) {
-        if (json is Map<String, dynamic>) {
-          return Asset.fromJson(json);
-        } else {
-          throw FormatException('Unexpected data format for asset: $json');
-        }
-      }).toList();
-  } catch (e, stacktrace) {
-    print("Error in fetchAssetsByClientId: $e");
-    print("Stacktrace: $stacktrace");
-    rethrow; // Rethrow to allow upstream error handling
-  }
-}
-
-Future<List<History>> fetchHistoryByClientId(String clientId) async {
-  try {
-    // Make GET request to fetch history data
-    final BaseResModel baseRes = await doGet('$serviceURL/portal/household/$clientId');
-    print('Fetching history for client $clientId: $baseRes');
+    print('Fetched data for client $clientId: ${baseRes.data}');
     
-    // Assuming the response contains a field "history" with a list of historical records
-    final List<dynamic> data = baseRes.data["history"];
-    print('History data: $data');
-    
-    // Parse each item as History if it is a Map
-    return data.map((json) {
-      if (json is Map<String, dynamic>) {
-        return History.fromJson(json); // Assuming History class has fromJson method
-      } else {
-        throw FormatException('Unexpected data format for history: $json');
-      }
-    }).toList();
-  } catch (e, stacktrace) {
-    print("Error in fetchHistoryByClientId: $e");
-    print("Stacktrace: $stacktrace");
-    rethrow; // Rethrow to allow upstream error handling
-  }
-}
-
-Future<List<Asset>> fetchAssetsByAccountId(String accountId) async {
-  try {
-    final BaseResModel baseRes = await doGet('$serviceURL/portal/account/$accountId');
-    print('Fetching assets for account ID $accountId: $baseRes');
-    
+    // Ensure the data is in the correct format
     final Map<String, dynamic> data = baseRes.data;
-    print('Account data including assets and holdings: $data');
-
-    if (data.containsKey('assets') && data['assets'] is List) {
-      final List<dynamic> assetsData = data['assets'];
-      print('Assets data received: $assetsData');
-      return assetsData.map((json) {
-        final assetJson = Map<String, dynamic>.from(json as Map);
-        return Asset.fromJson(assetJson);
-      }).toList();
+    if (data.containsKey('assets') && data.containsKey('history')) {
+      return data; // Return the entire response data
     } else {
-      throw FormatException('Assets data not found or in unexpected format.');
+      throw FormatException('Response does not contain required fields: assets or history.');
     }
   } catch (e, stacktrace) {
-    print("Error in fetchAssetsByAccountId: $e");
+    print("Error in fetchDataByClientId: $e");
     print("Stacktrace: $stacktrace");
     rethrow;
   }
 }
 
-Future<List<StockAsset>> fetchHoldingsByAccountId(String accountId) async {
+Future<Map<String, dynamic>> fetchAccountData(String accountId) async {
   try {
+    // Fetch account data in one API call
     final BaseResModel baseRes = await doGet('$serviceURL/portal/account/$accountId');
-    print('Fetching holdings for account ID $accountId: $baseRes');
+    print('Fetched account data for ID $accountId: $baseRes');
     
     final Map<String, dynamic> data = baseRes.data;
-    print('Account data including assets and holdings: $data');
-
-    if (data.containsKey('holdings') && data['holdings'] is List) {
-      final List<dynamic> holdingsData = data['holdings'];
-      print('Holdings data received: $holdingsData');
-      
-      // Check the structure of each holding object
-      holdingsData.forEach((holding) {
-        print('Holding item: $holding');
-      });
-
-      // Convert to StockAsset objects
-      return holdingsData.map((json) {
-        final holdingJson = Map<String, dynamic>.from(json as Map);
-        return StockAsset.fromJson(holdingJson);
-      }).toList();
-    } else {
-      throw FormatException('Holdings data not found or in unexpected format.');
+    print('Complete account data: $data');
+    
+    // Ensure data contains the expected keys
+    if (data.isEmpty || (!data.containsKey('assets') && !data.containsKey('holdings'))) {
+      throw FormatException('Expected assets or holdings data not found.');
     }
+
+    return data; // Return the raw account data
   } catch (e, stacktrace) {
-    print("Error in fetchHoldingsByAccountId: $e");
+    print("Error in fetchAccountData: $e");
     print("Stacktrace: $stacktrace");
     rethrow;
   }
 }
-
-
-
 
 }
 
