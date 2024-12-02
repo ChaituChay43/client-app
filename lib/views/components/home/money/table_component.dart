@@ -39,11 +39,11 @@ class ReusableTable extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18.0),
       child: tableData.isEmpty
-          ? Column(
+          ? const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
-                const CircularProgressIndicator(),
+                SizedBox(height: 20),
+                CircularProgressIndicator(),
               ],
             )
           : Column(
@@ -56,7 +56,7 @@ class ReusableTable extends StatelessWidget {
                       child: Center(
                         child: Text(
                           column.name,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 13.0,color: Colors.black),
                           overflow: column.isEllipsis ? TextOverflow.ellipsis : null,
                           textAlign: column.textAlign,
                         ),
@@ -95,7 +95,7 @@ class ReusableTable extends StatelessWidget {
                                             Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: const BorderRadius.all(
-                                                    Radius.circular(1.0)),
+                                                    Radius.circular(5.0)),
                                                 color: colors[index % colors.length],
                                               ),
                                               margin:
@@ -136,7 +136,7 @@ class ReusableTable extends StatelessWidget {
                                                 fontWeight: column.isBold
                                                     ? FontWeight.bold
                                                     : FontWeight.normal,
-                                                fontSize: 13.0),
+                                                fontSize: 7.0),
                                             overflow: column.isEllipsis
                                                 ? TextOverflow.ellipsis
                                                 : null,

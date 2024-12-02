@@ -20,6 +20,7 @@ class AccountList extends StatelessWidget {
     }
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: accounts.map((account) {
         // Check if this account is selected
         bool isSelected = account.id == selectedAccountId;
@@ -27,6 +28,8 @@ class AccountList extends StatelessWidget {
 
         return Column(
           children: [
+          
+
             AccountCard(
               accountId: account.id,
               title: account.accountName,

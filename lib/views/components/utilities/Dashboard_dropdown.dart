@@ -31,7 +31,7 @@ class _DropdownIconButtonState extends State<DropdownIconButton> {
         return widget.items.map((String item) {
           return PopupMenuItem<String>(
             value: item,
-            child: Text(item),
+            child: Text(item, style: TextStyle(fontSize: 11.0),),
           );
         }).toList();
       },

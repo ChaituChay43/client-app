@@ -7,9 +7,9 @@ class HistoryGraph extends StatefulWidget {
   final List<History> householdHistory;
 
   const HistoryGraph({
-    Key? key,
+    super.key,
     this.householdHistory = const [],
-  }) : super(key: key);
+  });
 
   @override
   _HistoryGraphState createState() => _HistoryGraphState();
@@ -75,7 +75,7 @@ void initState() {
 Widget build(BuildContext context) {
   print(' my data is $data');
   return Container(
-    padding: const EdgeInsets.all(20.0),
+    padding: const EdgeInsets.all(18.0),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,9 +83,8 @@ Widget build(BuildContext context) {
           "Portfolio Balance History",
           style: TextStyle(
             fontFamily: "Roboto",
-            fontSize: 20.0,
+            fontSize: 15,
             color: Colors.black,
-            fontWeight: FontWeight.bold,
           ),
         ),
        Padding(
@@ -93,12 +92,6 @@ Widget build(BuildContext context) {
   child: Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
-      const SizedBox(width: 50.0),
-      const Text(
-        "zoom",
-        style: TextStyle(color: Colors.grey, fontSize: 12.0, fontWeight: FontWeight.bold),
-      ),
-      const SizedBox(width: 8.0),
       OutlinedButton(
         onPressed: () => updateChartData('YTD'),
         style: OutlinedButton.styleFrom(
@@ -172,7 +165,7 @@ Widget build(BuildContext context) {
 ),
 Expanded(
   child: Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.only(top: 12.0),
     child: LineChart(
       LineChartData(
         lineBarsData: [

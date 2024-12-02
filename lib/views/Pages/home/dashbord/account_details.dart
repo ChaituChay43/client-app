@@ -20,7 +20,7 @@ class _AccountDetailsState extends State<AccountDetails> {
         builder: (context, provider, child) {
           final accounts = provider.accounts;
           final selectedAccount = provider.selectedAccount;
-          final isLoading = provider.isLoading; // Track loading state from the provider
+          final isLoading = provider.isLoading; 
 
           return accounts.isEmpty && selectedAccount == null
               ? const Center(child: Text("Loading accounts..."))

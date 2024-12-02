@@ -21,7 +21,7 @@ Future<List<Asset>> fetchAssets(String accountId) async {
         return Asset.fromJson(assetJson);
       }).toList();
     } else {
-      throw FormatException('Assets data not found or in unexpected format.');
+      throw const FormatException('Assets data not found or in unexpected format.');
     }
   } catch (e) {
     print("Error in fetchAssets: $e");
@@ -42,7 +42,7 @@ Future<List<StockAsset>> fetchHoldings(String accountId) async {
         return StockAsset.fromJson(holdingJson);
       }).toList();
     } else {
-      throw FormatException('Holdings data not found or in unexpected format.');
+      throw const FormatException('Holdings data not found or in unexpected format.');
     }
   } catch (e) {
     print("Error in fetchHoldings: $e");

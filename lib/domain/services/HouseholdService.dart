@@ -19,26 +19,6 @@ class HouseholdService {
     }
   }
 
-  Future<Household?> getHouseholdById(String householdGuid) async {
-    try {
-      var household = await _householdRepository.getHouseholdById(householdGuid);
-      return household;
-    } catch (error) {
-      print('Error fetching household by ID: $error');
-      throw Exception('Failed to fetch household with ID: $householdGuid');
-    }
-  }
-
-  // Future<List<Account>> getAccountsByhouseholdGuid(String householdGuid) async {
-  //   try {
-  //     var accounts = await _householdRepository.fetchAccountsByhouseholdGuid(householdGuid);
-  //     return accounts;
-  //   } catch (error) {
-  //     print('Error fetching accounts for household ID: $error');
-  //     throw Exception('Failed to fetch accounts for household ID: $householdGuid');
-  //   }
-  // }
-
   Future<List<Asset>> getAssetsByhouseholdGuid(String householdGuid) async {
     try {
       var assets = await _householdRepository.fetchAssetsByhouseholdGuid(householdGuid);

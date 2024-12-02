@@ -2,7 +2,8 @@ import 'package:amplify/constants/app_strings.dart';
 import 'package:amplify/views/components/platform/app_logo_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart'; // GoRouter for navigation
+import 'package:go_router/go_router.dart';
+// GoRouter for navigation
 import '../../../constants/asset_paths.dart';
 import '../base_screen.dart';
 

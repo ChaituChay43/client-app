@@ -2,7 +2,6 @@
 import 'package:amplify/data/api_services/api_services.dart';
 import 'package:amplify/data/repositories/DashboardRepository/DashboardRepository.dart';
 import 'package:amplify/models/other/account_data.dart';
-import 'package:collection/collection.dart';
 
 
 class DashboardRepositoryImpl implements DashboardRepository {

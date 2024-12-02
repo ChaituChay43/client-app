@@ -7,42 +7,94 @@ import 'package:amplify/models/response/Household.dart';
 import 'package:flutter/foundation.dart';
 
 class ScreenIndexProvider with ChangeNotifier {
+  // Services
   final DashboardService accountsService = DashboardService(DashboardRepositoryImpl());
-    final HouseholdService service = HouseholdService(HouseholdRepositoryImpl());
-
+  final HouseholdService service = HouseholdService(HouseholdRepositoryImpl());
   List<String> _householdIds = [];
   List<String> get householdIds => _householdIds;
+
   bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   int _selectedIndex = 0;
   String? _selectedAccountId;
   Account? _selectedAccount;
 
+  List<Account> _accounts = [];
+  List<Account> get accounts => _accounts;
+
   late List<Household> fetchedHouseholds = [];
-  List<Account> _accounts = []; // List to store fetched accounts
-  List<Account> get accounts => _accounts; // Getter to access accounts list
 
-  final Map<String, bool> _expandedStates = {}; // Map to track isExpanded for each household
-  bool isExpanded(String householdId) => _expandedStates[householdId] ?? false; // Getter for specific household's expanded state
+  final Map<String, bool> _expandedStates = {}; // To track isExpanded for each household
+  final Map<String, double> _savedPositions = {}; // To track saved scroll positions
 
-  int get selectedIndex => _selectedIndex;
-  String? get selectedAccountId => _selectedAccountId;
-  Account? get selectedAccount => _selectedAccount;
-  bool get isLoading => _isLoading;
-
-  // Constructor to initialize the households when the provider is created
+  // -------------------- Constructor --------------------
   ScreenIndexProvider() {
     _initializeHouseholds();
   }
 
-  // Method to initialize households and set householdIds
+  // -------------------- Getters and Setters --------------------
+
+  int get selectedIndex => _selectedIndex;
+  String? get selectedAccountId => _selectedAccountId;
+  Account? get selectedAccount => _selectedAccount;
+
+  /// Check if a specific household is expanded
+  bool isExpanded(String householdId) {
+    return _expandedStates[householdId] ?? false;
+  }
+
+  /// Get saved scroll position for a specific household
+  double getSavedPosition(String householdId) {
+    return _savedPositions[householdId] ?? 0.0;
+  }
+
+  /// Set loading state
+  void setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
+  /// Update household IDs
+  void setHouseholdIds(List<String> ids) async {
+    _householdIds = ids;
+    notifyListeners();
+
+    // Fetch accounts for the households
+    await _tryFetchAccountsForHousehold(ids);
+  }
+
+  /// Update selected index
+  void updateIndex(int newIndex) {
+    _selectedIndex = newIndex;
+    notifyListeners();
+  }
+
+  /// Set expanded state for a household
+  void setExpanded(String householdId, bool value) {
+    _expandedStates[householdId] = value;
+    notifyListeners();
+  }
+
+  /// Toggle expanded state for a household
+  void toggleExpanded(String householdId) {
+    _expandedStates[householdId] = !isExpanded(householdId);
+    notifyListeners();
+  }
+
+  /// Save scroll position for a specific household
+  void savePosition(String householdId, double position) {
+    _savedPositions[householdId] = position;
+    notifyListeners();
+  }
+
+  // -------------------- Initialization and Data Fetching --------------------
+
+  /// Initialize households and set household IDs
   Future<void> _initializeHouseholds() async {
     setLoading(true);
     try {
-      // Fetch households
       fetchedHouseholds = await service.getHouseholds();
-
-      // Extract householdIds
       List<String> householdIds = fetchedHouseholds.map((household) => household.id).toList();
       setHouseholdIds(householdIds);
     } catch (e) {
@@ -52,29 +104,17 @@ class ScreenIndexProvider with ChangeNotifier {
     }
   }
 
-  // Setter for householdIds with added logic to check for accounts
-  void setHouseholdIds(List<String> ids) async {
-    _householdIds = ids;
-    notifyListeners();
-
-    // Try to fetch accounts using the first householdId
-    await _tryFetchAccountsForHousehold(ids);
-  }
-
-  // Method to try fetching accounts for a householdId
+  /// Try fetching accounts for each household ID
   Future<void> _tryFetchAccountsForHousehold(List<String> ids) async {
     for (String householdId in ids) {
       try {
-        // Fetch accounts using the householdId
         var accounts = await accountsService.getAllAccountsByHouseholdId(householdId);
-
-        // If accounts are found, update the selected account and store all accounts
         if (accounts.isNotEmpty) {
-          _accounts = accounts; // Store all fetched accounts
-          _selectedAccountId = accounts.first.id; // Get the first account
+          _accounts = accounts;
+          _selectedAccountId = accounts.first.id;
           _selectedAccount = await accountsService.getAccountById(accounts[0].id);
-          notifyListeners(); // Notify listeners after updating selected account
-          break; // Exit loop if accounts are found and selected
+          notifyListeners();
+          break; // Stop looping once accounts are found
         }
       } catch (e) {
         print('Error fetching accounts for household $householdId: $e');
@@ -82,39 +122,21 @@ class ScreenIndexProvider with ChangeNotifier {
     }
   }
 
-  // Method to update selected account if selectedAccountId is changed
+  // -------------------- Account Selection --------------------
+
+  /// Update selected account ID and fetch account details
   Future<void> updateSelectedAccountId(String newAccountId) async {
     _selectedAccountId = newAccountId;
     notifyListeners();
 
-    // Fetch the account data based on the new selectedAccountId
     if (_selectedAccountId != null) {
-      _selectedAccount = await accountsService.getAccountById(_selectedAccountId!);
-      print('My selectedAccount is $_selectedAccount'); // Assuming this method exists
-      notifyListeners();
+      try {
+        _selectedAccount = await accountsService.getAccountById(_selectedAccountId!);
+        print('Selected Account: $_selectedAccount');
+        notifyListeners();
+      } catch (e) {
+        print('Error updating selected account: $e');
+      }
     }
-  }
-
-  // Setter for updating selectedIndex
-  void updateIndex(int newIndex) {
-    _selectedIndex = newIndex;
-    notifyListeners();
-  }
-
-  // Toggle `isExpanded` state for a specific household
-  void toggleExpanded(String householdId) {
-    _expandedStates[householdId] = !isExpanded(householdId);
-    notifyListeners();
-  }
-
-  // Explicit setter for `isExpanded` for a specific household
-  void setExpanded(String householdId, bool value) {
-    _expandedStates[householdId] = value;
-    notifyListeners();
-  }
-
-  void setLoading(bool value) {
-    _isLoading = value;
-    notifyListeners();
   }
 }

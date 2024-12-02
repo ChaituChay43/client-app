@@ -1,4 +1,4 @@
-#Fri Nov 22 18:34:04 IST 2024
+#Thu Nov 28 13:48:37 IST 2024
 base.0=D\:\\App\\amplify_client\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

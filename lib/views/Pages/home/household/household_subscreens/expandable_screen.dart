@@ -22,10 +22,10 @@ class ExpandableHouseholdSection extends StatefulWidget {
   final DashboardService accountsService;
 
   const ExpandableHouseholdSection({
-    Key? key,
+    super.key,
     required this.household,
     required this.accountsService, 
-  }) : super(key: key);
+  });
 
   @override
   _ExpandableHouseholdSectionState createState() => _ExpandableHouseholdSectionState();
@@ -40,15 +40,43 @@ class _ExpandableHouseholdSectionState extends State<ExpandableHouseholdSection>
   final HouseholdService service = HouseholdService(HouseholdRepositoryImpl());
   final List<ColumnConfig> stockColumns = [
     ColumnConfig(name: 'Name', isEllipsis: true),
-    ColumnConfig(name: 'Value', textAlign: TextAlign.end, isBold: true, isEllipsis: true),
-    ColumnConfig(name: 'Percentage', textAlign: TextAlign.end, isBold: true, isEllipsis: true),
+    ColumnConfig(name: 'Value', textAlign: TextAlign.end,  isEllipsis: true),
+    ColumnConfig(name: 'Percentage', textAlign: TextAlign.end,  isEllipsis: true),
   ];
 
   late List<History> HouseholdHistory=[];
+   final ScrollController _scrollController = ScrollController();
+
+  // Variable to save scroll position
+  double _savedScrollOffset = 0.0;
 
   @override
   void initState() {
     super.initState();
+    // Save the scroll position when the user scrolls
+    _scrollController.addListener(() {
+      _savedScrollOffset = _scrollController.offset;
+    });
+
+    // Restore the scroll position when the widget rebuilds
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _restoreScrollPosition();
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<ScreenIndexProvider>(context, listen: false);
+      if (provider.isExpanded(widget.household.id)) {
+        fetchHouseholdAssetDetails(widget.household.id);
+        _fetchAccounts(widget.household.id);
+        _fetchHistory(widget.household.id);
+      }
+    });
+  }
+  // Restore the scroll position
+  void _restoreScrollPosition() {
+    if (_savedScrollOffset > 0.0) {
+      _scrollController.jumpTo(_savedScrollOffset);
+    }
   }
 
   Future<void> fetchHouseholdAssetDetails(String householdGuid) async {
@@ -155,6 +183,7 @@ Future<void> _fetchHistory(String householdGuid) async {
         color: provider.isExpanded(widget.household.id) ? Colors.white : AppTheme.primaryColor,
       ),
       child: ExpansionTile(
+        initiallyExpanded: provider.isExpanded(widget.household.id),
         title: SummaryCard(
           title: widget.household.householdName,
           totalAmount: '\$$HouseholdAmount',
@@ -165,38 +194,45 @@ Future<void> _fetchHistory(String householdGuid) async {
           color: provider.isExpanded(widget.household.id) ? AppTheme.primaryColor : Colors.white,
           size: 40.0,
         ),
-        onExpansionChanged: (expanded) {
-          provider.setExpanded(widget.household.id, expanded); // Update provider  
-          if (provider.isExpanded(widget.household.id)) {
-                fetchHouseholdAssetDetails(widget.household.id);
-                _fetchAccounts(widget.household.id);
-                _fetchHistory(widget.household.id);
-           }
+       onExpansionChanged: (expanded) {
+          provider.setExpanded(widget.household.id, expanded);
+          if (expanded) {
+            fetchHouseholdAssetDetails(widget.household.id);
+            _fetchAccounts(widget.household.id);
+            _fetchHistory(widget.household.id);
+          }
         },
         children: [
           if (provider.isExpanded(widget.household.id)) ...[
-          SizedBox(
-                  height: 440.0,
-                  child: isLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : hasError
-                          ? const Center(
-                              child: Text(
-                                "Failed to load history data. Please try again.",
-                                style: TextStyle(fontSize: 16.0, color: Colors.black),
-                              ),
-                            )
-                          : HouseholdHistory.isNotEmpty
-                              ? HistoryGraph(householdHistory: HouseholdHistory)
-                              : hasDataLoadedInitially
-                                  ? const Center(
-                                      child: Text(
-                                        "No History data found",
-                                        style: TextStyle(fontSize: 16.0, color: Colors.black),
-                                      ),
-                                    )
-                                  : const SizedBox.shrink(), // Show nothing until data is loaded
-                ),
+          SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                SizedBox(
+                        height: 440.0,
+                        child: isLoading
+                            ? const Center(child: CircularProgressIndicator())
+                            : hasError
+                                ? const Center(
+                                    child: Text(
+                                      "Failed to load history data. Please try again.",
+                                      style: TextStyle(fontSize: 16.0, color: Colors.black),
+                                    ),
+                                  )
+                                : HouseholdHistory.isNotEmpty
+                                    ? HistoryGraph(householdHistory: HouseholdHistory)
+                                    : hasDataLoadedInitially
+                                        ? const Center(
+                                            child: Text(
+                                              "No History data found",
+                                              style: TextStyle(fontSize: 16.0, color: Colors.black),
+                                            ),
+                                          )
+                                        : const SizedBox.shrink(), // Show nothing until data is loaded
+                      ),
+              ],
+            ),
+          ),
             if (chartData.chartValues.isNotEmpty && !isLoading)
               ChartContainer(chartData: chartData),
             if (isLoading)

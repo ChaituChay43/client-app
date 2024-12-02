@@ -52,7 +52,7 @@ class AccountHeader extends StatelessWidget {
                       maxLines: 1, // Limit to one line
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
+                        fontSize: 17.0,
                       ),
                     ),
                   ),

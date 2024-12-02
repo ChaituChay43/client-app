@@ -60,6 +60,7 @@ Future<List<History>> fetchHistoryByhouseholdGuid(String householdGuid) async {
     return []; // Return an empty list in case of error
   }
 }
+
   @override
   Future<Household?> getHouseholdById(String uniqueId) {
     // TODO: implement getHouseholdById

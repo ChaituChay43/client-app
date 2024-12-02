@@ -80,7 +80,7 @@ Future<Map<String, dynamic>> fetchDataByClientId(String clientId) async {
     if (data.containsKey('assets') && data.containsKey('history')) {
       return data; // Return the entire response data
     } else {
-      throw FormatException('Response does not contain required fields: assets or history.');
+      throw const FormatException('Response does not contain required fields: assets or history.');
     }
   } catch (e, stacktrace) {
     print("Error in fetchDataByClientId: $e");
@@ -100,7 +100,7 @@ Future<Map<String, dynamic>> fetchAccountData(String accountId) async {
     
     // Ensure data contains the expected keys
     if (data.isEmpty || (!data.containsKey('assets') && !data.containsKey('holdings'))) {
-      throw FormatException('Expected assets or holdings data not found.');
+      throw const FormatException('Expected assets or holdings data not found.');
     }
 
     return data; // Return the raw account data

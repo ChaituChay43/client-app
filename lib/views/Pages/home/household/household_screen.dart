@@ -1,4 +1,3 @@
-import 'package:amplify/data/providers/screen_index_provider.dart';
 import 'package:amplify/data/repositories/DashboardRepository/DashboardRepositoryImpl.dart';
 import 'package:amplify/data/repositories/householdRepository/HouseholdRepositoryImpl.dart';
 import 'package:amplify/domain/services/DashboardService.dart';
@@ -6,7 +5,6 @@ import 'package:amplify/domain/services/HouseholdService.dart';
 import 'package:amplify/models/response/Household.dart';
 import 'package:amplify/views/Pages/home/household/household_subscreens/expandable_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HouseholdScreen extends StatefulWidget {
   const HouseholdScreen({super.key});

@@ -47,7 +47,7 @@ class BalanceCard extends StatelessWidget {
             children: [
               const Text(
                 'Total Balance',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const SizedBox(height: 10.0),
               Row(
@@ -56,11 +56,11 @@ class BalanceCard extends StatelessWidget {
                   const SizedBox(width: 10.0),
                   Text(
                     '\$$totalBalance',
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ],
               ),
-              const SizedBox(height: 20.0),
+             
             ],
           ),
         ),
@@ -74,7 +74,7 @@ class BalanceCard extends StatelessWidget {
     
               ),
             ),
-            SizedBox(width: 8.0,),
+            const SizedBox(width: 8.0,),
             Expanded(
               child: Padding(
                   padding: const EdgeInsets.only(top: 10.0,bottom: 10.0),
@@ -91,7 +91,7 @@ class BalanceCard extends StatelessWidget {
                 child: balanceCard('QTD', '\$$qtdValue', '${(qtd.percentage * 100).toStringAsFixed(2)}%'),
               ),
             ),
-             SizedBox(width: 8.0,),
+             const SizedBox(width: 8.0,),
             Expanded(
               child: Padding(
                   padding: const EdgeInsets.only(top: 10.0,bottom: 10.0),
@@ -126,7 +126,7 @@ class BalanceCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 20.0),
+            style: const TextStyle(fontSize: 16.0),
           ),
           const SizedBox(height: 10.0),
           Row(
@@ -134,7 +134,7 @@ class BalanceCard extends StatelessWidget {
             children: [
               Text(
                 amount,
-                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(width: 10.0),
               Container(

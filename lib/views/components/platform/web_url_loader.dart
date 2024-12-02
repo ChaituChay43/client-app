@@ -1,5 +1,4 @@
 import 'package:amplify/data/providers/screen_index_provider.dart';
-import 'package:amplify/models/request/oauth_query_params.dart';
 import 'package:amplify/views/Pages/home/dashbord/account_details.dart';
 import 'package:amplify/views/Pages/home/addaper/addepar.dart';
 import 'package:amplify/views/Pages/home/household/household_screen.dart';
@@ -7,7 +6,6 @@ import 'package:amplify/views/Pages/home/money/money_screen.dart';
 import 'package:amplify/views/components/platform/mobile_url_loader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:pkce/pkce.dart';
 import 'package:amplify/constants/asset_paths.dart';
 import 'package:amplify/theme/app_theme.dart';
 import 'package:provider/provider.dart';

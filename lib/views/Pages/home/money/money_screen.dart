@@ -86,8 +86,8 @@ class _MoneyContentState extends State<MoneyContent> {
   final List<ColumnConfig> stockColumns = [
     ColumnConfig(name: 'Symbol', isBold: true, backgroundColor: Colors.lightBlueAccent.withOpacity(0.3), isEllipsis: true),
     ColumnConfig(name: 'Name', isEllipsis: true),
-    ColumnConfig(name: 'Value', textAlign: TextAlign.end, isBold: true, isEllipsis: true),
-    ColumnConfig(name: 'Percentage', textAlign: TextAlign.end, isBold: true, isEllipsis: true),
+    ColumnConfig(name: 'Value', textAlign: TextAlign.end,  isEllipsis: true),
+    ColumnConfig(name: 'Percentage', textAlign: TextAlign.end,  isEllipsis: true),
   ];
 
   @override
@@ -156,7 +156,7 @@ class _MoneyContentState extends State<MoneyContent> {
               padding: EdgeInsets.all(16.0),
               child: Text(
                 'Asset Class Chart',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
@@ -187,7 +187,7 @@ class _MoneyContentState extends State<MoneyContent> {
                 children: [
                   Text(
                     'Holdings',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

@@ -6,7 +6,6 @@ I am laying out the important files to look at.
 Please read the subsection for each :smile:
 
 ```
-.
 ├── lib
 │   ├── auth.dart 
 │   ├── globals.dart

@@ -17,7 +17,7 @@ class SummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(7.0),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(15.0),
@@ -34,7 +34,7 @@ class SummaryCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis, // Show ellipses if it exceeds
             style: TextStyle(
               color: isExpanded ?  AppTheme.primaryColor: Colors.white,
-              fontSize: 25,
+              fontSize: 17,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -45,7 +45,7 @@ class SummaryCard extends StatelessWidget {
               totalAmount!,
               style: TextStyle(
                 color: isExpanded ?  AppTheme.primaryColor: Colors.white,
-                fontSize: 32,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),

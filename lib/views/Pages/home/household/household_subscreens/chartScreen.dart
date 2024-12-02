@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ChartContainer extends StatelessWidget {
   final ChartData chartData;
 
-  const ChartContainer({Key? key, required this.chartData}) : super(key: key);
+  const ChartContainer({super.key, required this.chartData});
 
   @override
   Widget build(BuildContext context) {

@@ -10,16 +10,17 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Extract account details with fallback values
-     final HouseholdAmount=NumberFormat('#,##0', 'en_US').format(account.totalBalance);
+    final householdAmount =
+        NumberFormat('#,##0', 'en_US').format(account.totalBalance);
     String accountName = account.accountName ?? 'N/A';
     String custodian = account.custodian.name ?? 'N/A';
     String accountNumber = account.accountNumber ?? 'N/A';
-    String totalBalance = HouseholdAmount.toString() ?? 'N/A';
+    String totalBalance = householdAmount.toString();
     String taxStatus = account.taxStatus.name ?? 'N/A';
-    String accountType = account.type ?? 'N/A'; // Dynamic account type
+    String accountType = account.type ?? 'N/A';
     String openDate = account.createdDate != null
         ? '${account.createdDate!.month}/${account.createdDate!.day}/${account.createdDate!.year}'
-        : 'N/A'; // Format the createdDate
+        : 'N/A';
 
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -39,23 +40,23 @@ class ProfileCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.start, 
             children: [
               CircleAvatar(
                 backgroundColor: Colors.blue,
                 child: Text(
-                  accountName.isNotEmpty ? accountName[0] : 'N', // First letter of the account name
+                  accountName.isNotEmpty ? accountName[0] : 'N',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
               const SizedBox(width: 10),
-              // Tooltip with ellipses for account name
               Expanded(
                 child: Tooltip(
-                  message: accountName, // Show full account name as tooltip
+                  message: accountName,
                   child: Text(
                     accountName,
-                    overflow: TextOverflow.ellipsis, // Add ellipses when overflow occurs
-                    maxLines: 1, // Limit to one line
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -63,33 +64,87 @@ class ProfileCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          Wrap(
-            spacing: 50,
-            runSpacing: 10,
-            children: [
-              propertyRow('Type', accountType), // Dynamic account type
-              propertyRow('Tax Status', taxStatus),
-              propertyRow('APM Avail. Cash', '\$$totalBalance'),
-              propertyRow('Custodian', custodian),
-              propertyRow('Account', accountNumber),
-              propertyRow('Open Date', openDate), // Display created date here
-            ],
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isMobile = constraints.maxWidth < 600;
+
+              if (isMobile) {
+                // Display properties in a Column for mobile
+                return Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      propertyRow('Type', accountType, isMobile),
+                      propertyRow('Tax Status', taxStatus, isMobile),
+                      propertyRow('APM Avail. Cash', '\$$totalBalance', isMobile),
+                      propertyRow('Custodian', custodian, isMobile),
+                      propertyRow('Account', accountNumber, isMobile),
+                      propertyRow('Open Date', openDate, isMobile),
+                    ],
+                  ),
+                );
+              } else {
+                // Display properties in a Row and wrap if overflow occurs
+                return Wrap(
+                  spacing: 20.0,
+                  runSpacing: 10.0,
+                  children: [
+                    propertyRow1('Type', accountType, isMobile),
+                    propertyRow1('Tax Status', taxStatus, isMobile),
+                    propertyRow1('APM Avail Cash', '\$$totalBalance', isMobile),
+                    propertyRow1('Custodian', custodian, isMobile),
+                    propertyRow1('Account', accountNumber, isMobile),
+                    propertyRow1('Open Date', openDate, isMobile),
+                  ],
+                );
+              }
+            },
           ),
         ],
       ),
     );
   }
 
-  Widget propertyRow(String label, String value) {
+  Widget propertyRow(String label, String value, bool isMobile) {
     return Row(
-      mainAxisSize: MainAxisSize.min,
       children: [
-        Text('$label: '),
-        Text(
-          value,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+        Expanded(
+          flex:  1 ,  // Use flex only for mobile devices
+          child: Tooltip(
+            message: label,
+            child: Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0),
+            ),
+          ),
+        ),
+        const Text(':   '),
+        Expanded(
+          flex: 1 , // Use flex only for mobile devices
+          child: Tooltip(
+            message: value,
+            child: Text(
+              value,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.w500),
+            ),
+          ),
         ),
       ],
     );
   }
+   Widget propertyRow1(String label, String value, bool isMobile) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('$label: ', style: const TextStyle(fontWeight: FontWeight.bold),),
+        Text(
+          value,
+         
+        ),
+      ],
+    );
+  }
+  
 }
